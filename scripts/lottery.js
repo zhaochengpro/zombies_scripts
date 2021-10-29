@@ -1,4 +1,3 @@
-const axios = require("axios");
 const { ethers, utils } = require('ethers');
 const keccak256 = require("keccak256");
 const Web3 = require("web3");
@@ -60,7 +59,6 @@ async function main() {
     }
 }
 
-// verifyDiamondPrizeWinner()
 
 async function verifyDiamondPrizeWinner() {
     const diamondWiner = await Lottery.connect(provider.getSigner()).verifyDiamondPrizeWinner();
@@ -185,22 +183,6 @@ function getView(bytes) {
 
 function toUint32(bytes) {
     return getView(bytes).getUint32();
-}
-
-function str2Buffer(str) {
-    // 首先将字符串转为16进制
-    let val = ""
-    for (let i = 0; i < str.length; i++) {
-        if (val === '') {
-            val = str.charCodeAt(i).toString(16)
-        } else {
-            val += ',' + str.charCodeAt(i).toString(16)
-        }
-    }
-    // 将16进制转化为ArrayBuffer
-    return new Uint8Array(val.match(/[\da-f]{2}/gi).map(function (h) {
-        return parseInt(h, 16)
-    })).buffer
 }
 
 (() => {
